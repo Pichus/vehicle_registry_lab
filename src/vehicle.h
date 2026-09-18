@@ -8,7 +8,7 @@ struct Vehicle
     char *type;
     char *brand;
     char *license_plate;
-    Person owner;
+    struct Person owner;
 };
 
 #endif // VEHICLE_H
