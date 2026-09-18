@@ -1,0 +1,5 @@
+struct Person
+{
+    char *name;
+    int age;
+};
