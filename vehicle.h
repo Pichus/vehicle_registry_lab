@@ -1,3 +1,6 @@
+#ifndef VEHICLE_H
+#define VEHICLE_H
+
 #include "person.h"
 
 struct Vehicle
@@ -7,3 +10,5 @@ struct Vehicle
     char *license_plate;
     Person owner;
 };
+
+#endif // VEHICLE_H
