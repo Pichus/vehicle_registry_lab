@@ -1,0 +1,16 @@
+#ifndef OPERATION_H
+#define OPERATION_H
+
+enum Operation
+{
+    ADD_VEHICLE = 1,
+    REMOVE_VEHICLE = 2,
+    SORT_REGISTRY = 3,
+    SHOW_INFO_FOR_VEHICLE = 4,
+    SHOW_INFO_FOR_ALL_VEHICLES = 5,
+    ADD_RANDOM_VEHICLE = 6,
+    SEARCH_FOR_VEHICLE_OWNER = 7,
+    QUIT = 0
+};
+
+#endif // OPERATION_H
