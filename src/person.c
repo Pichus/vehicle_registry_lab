@@ -10,11 +10,18 @@ bool initialize_person_from_user_input(struct Person *person)
 
     if (!is_name_input_successful)
     {
+        printf("Invalid name input\n");
         return false;
     }
 
     printf("Enter the person's age: ");
     bool is_age_input_successful = read_int_input(&(person->age));
 
-    return is_age_input_successful;
+    if (!is_age_input_successful)
+    {
+        printf("Invalid age input\n");
+        return false;
+    }
+
+    return true;
 }
