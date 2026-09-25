@@ -29,4 +29,6 @@ void print_registry_contents(struct Registry *registry);
 
 bool is_registry_full(struct Registry *registry);
 
+bool is_registry_empty(struct Registry *registry);
+
 #endif // REGISTRY_H
