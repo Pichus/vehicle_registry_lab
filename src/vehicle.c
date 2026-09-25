@@ -19,6 +19,7 @@ bool initialize_vehicle_from_user_input(struct Vehicle *vehicle)
 
     if (!is_brand_input_successful)
     {
+        printf("Invalid brand input\n");
         return false;
     }
 
@@ -28,6 +29,7 @@ bool initialize_vehicle_from_user_input(struct Vehicle *vehicle)
 
     if (!is_license_plate_input_successful)
     {
+        printf("Invalid license plate input\n");
         return false;
     }
 
@@ -37,6 +39,7 @@ bool initialize_vehicle_from_user_input(struct Vehicle *vehicle)
 
     if (!is_type_input_successful)
     {
+        printf("Invalid type input\n");
         return false;
     }
 
@@ -44,5 +47,11 @@ bool initialize_vehicle_from_user_input(struct Vehicle *vehicle)
     bool is_owner_input_successful =
         initialize_person_from_user_input(&(vehicle->owner));
 
-    return is_owner_input_successful;
+    if (!is_owner_input_successful)
+    {
+        printf("Invalid owner input\n");
+        return false;
+    }
+
+    return true;
 }
