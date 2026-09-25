@@ -1,6 +1,9 @@
 #ifndef OPERATION_H
 #define OPERATION_H
 
+#define OPERATION_SELECTION_LOWER_BOUND 0
+#define OPERATION_SELECTION_UPPER_BOUND 7
+
 enum Operation
 {
     ADD_VEHICLE = 1,
