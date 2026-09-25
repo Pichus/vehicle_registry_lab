@@ -78,3 +78,17 @@ bool remove_vehicle_from_registry(struct Registry *registry,
 
     return true;
 }
+
+bool is_registry_sorted(struct Registry *registry)
+{
+    for (int i = 0; i < registry->vehicle_count - 1; i++)
+    {
+        if (strncmp(registry->vehicles[i].owner.name,
+                    registry->vehicles[i + 1].owner.name, MAX_NAME_SIZE) > 0)
+        {
+            return false;
+        }
+    }
+
+    return true;
+}

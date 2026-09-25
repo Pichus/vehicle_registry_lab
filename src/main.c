@@ -81,6 +81,18 @@ bool handle_remove_vehicle_operation(struct Registry *registry)
     return true;
 }
 
+bool handle_sort_registry_operation(struct Registry *registry)
+{
+    if (is_registry_empty(registry) || is_registry_sorted(registry))
+    {
+        return true;
+    }
+
+    sort_registry_by_owner_name(registry);
+
+    return true;
+}
+
 bool perform_operation_on_registry(struct Registry *registry,
                                    enum Operation operation)
 {
@@ -91,11 +103,14 @@ bool perform_operation_on_registry(struct Registry *registry,
     case ADD_VEHICLE:
         result = handle_add_vehicle_operation(registry);
         break;
-    case SHOW_INFO_FOR_ALL_VEHICLES:
-        print_registry_contents(registry);
-        break;
     case REMOVE_VEHICLE:
         result = handle_remove_vehicle_operation(registry);
+        break;
+    case SORT_REGISTRY:
+        result = handle_sort_registry_operation(registry);
+        break;
+    case SHOW_INFO_FOR_ALL_VEHICLES:
+        print_registry_contents(registry);
         break;
     default:
         break;
