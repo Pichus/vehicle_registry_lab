@@ -1,11 +1,20 @@
+debug = 0
+
 TARGET_EXEC := vehicle_registry
 
 BUILD_DIR := ./build
 SRC_DIR := ./src
 
-CC := gcc-15
-# https://stackoverflow.com/questions/3375697/what-are-the-useful-gcc-flags-for-c
 CFLAGS := -MMD -MP -Wall -Wextra -Wfloat-equal -Wundef -Wshadow -Wpointer-arith -Wstrict-prototypes
+
+ifeq ($(debug), 1)
+	CC := clang
+	CFLAGS := -g -O0 $(CFLAGS)
+else
+	CC := gcc-15
+endif
+
+# https://stackoverflow.com/questions/3375697/what-are-the-useful-gcc-flags-for-c
 
 SOURCE_FILES := $(wildcard $(SRC_DIR)/*.c)
 
