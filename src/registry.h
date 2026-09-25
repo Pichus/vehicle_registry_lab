@@ -18,7 +18,7 @@ void persist_registry(struct Registry registry);
 bool push_back_vehicle_to_registry(struct Registry *registry,
                                    struct Vehicle vehicle);
 
-void remove_vehicle_from_registry(struct Registry *registry,
+bool remove_vehicle_from_registry(struct Registry *registry,
                                   int vehicle_position);
 
 struct Vehicle *find_vehicle_by_owner_name(char *owner_name);

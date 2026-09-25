@@ -37,6 +37,50 @@ bool handle_add_vehicle_operation(struct Registry *registry)
     return true;
 }
 
+bool handle_remove_vehicle_operation(struct Registry *registry)
+{
+    if (is_registry_empty(registry))
+    {
+        printf("The registry contains no vehicles.\n");
+        return false;
+    }
+
+    printf("Enter the position of a vehicle you want to remove: ");
+
+    int vehicle_position_starting_from_1;
+    bool is_position_input_successful =
+        read_int_input(&vehicle_position_starting_from_1);
+
+    if (!is_position_input_successful)
+    {
+        printf("Invalid vehicle position input\n");
+        return false;
+    }
+
+    bool is_vehicle_position_valid =
+        vehicle_position_starting_from_1 >= 1 &&
+        vehicle_position_starting_from_1 <= registry->vehicle_count;
+
+    if (!is_vehicle_position_valid)
+    {
+        printf("There's no car with number %d in the registry\n",
+               vehicle_position_starting_from_1);
+    }
+
+    int vehicle_position_starting_from_0 = vehicle_position_starting_from_1 - 1;
+
+    bool is_vehicle_removal_successful = remove_vehicle_from_registry(
+        registry, vehicle_position_starting_from_0);
+
+    if (!is_vehicle_removal_successful)
+    {
+        printf("Couldn't remove the vehicle from the registry\n");
+        return false;
+    }
+
+    return true;
+}
+
 bool perform_operation_on_registry(struct Registry *registry,
                                    enum Operation operation)
 {
@@ -49,6 +93,9 @@ bool perform_operation_on_registry(struct Registry *registry,
         break;
     case SHOW_INFO_FOR_ALL_VEHICLES:
         print_registry_contents(registry);
+        break;
+    case REMOVE_VEHICLE:
+        result = handle_remove_vehicle_operation(registry);
         break;
     default:
         break;
