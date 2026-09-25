@@ -9,11 +9,33 @@
 #define INPUT_NUMERICAL_BASE 10
 #define MAX_USER_INPUT_BUFFER_SIZE 101
 
+// https://post.bytes.com/forum/topic/c/647172-checking-for-excessive-input-when-using-fgets#post4309375
+void flush_input_stream(void)
+{
+    int character;
+
+    do
+    {
+        character = getchar();
+    } while ((character != EOF) && (character != '\n'));
+
+    clearerr(stdin);
+}
+
 bool read_user_input_into_buffer(char *buffer, int buffer_size)
 {
     if (fgets(buffer, buffer_size, stdin) == NULL)
     {
         return false;
+    }
+
+    int newline_char_index = strcspn(buffer, "\n");
+
+    bool is_newline_char_found = newline_char_index != buffer_size - 1;
+
+    if (!is_newline_char_found)
+    {
+        flush_input_stream();
     }
 
     buffer[strcspn(buffer, "\n")] = '\0';
@@ -23,7 +45,6 @@ bool read_user_input_into_buffer(char *buffer, int buffer_size)
 
 bool parse_int_from_string(char *string, int *result)
 {
-
     char *end_ptr;
 
     errno = 0;
@@ -70,11 +91,4 @@ bool read_int_input(int *result)
     *result = parsed_value;
 
     return true;
-}
-
-bool read_string_input(char *destination, int max_length)
-{
-    int buffer_size = max_length + 1; // + 1 for the '\n'
-    char buffer[buffer_size];
-    read_user_input_into_buffer(buffer, max_length + 1);
 }

@@ -9,4 +9,6 @@ bool parse_int_from_string(char *string, int *result);
 
 bool read_int_input(int *result);
 
+void flush_input_stream(void);
+
 #endif // SAFE_INPUT_H
