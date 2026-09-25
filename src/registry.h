@@ -23,7 +23,7 @@ void remove_vehicle_from_registry(struct Registry *registry,
 
 struct Vehicle *find_vehicle_by_owner_name(char *owner_name);
 
-void sort_registry(struct Registry *registry);
+void sort_registry_by_owner_name(struct Registry *registry);
 
 void print_registry_contents(struct Registry *registry);
 
