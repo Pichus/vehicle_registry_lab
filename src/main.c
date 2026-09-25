@@ -65,6 +65,7 @@ bool handle_remove_vehicle_operation(struct Registry *registry)
     {
         printf("There's no car with number %d in the registry\n",
                vehicle_position_starting_from_1);
+        return false;
     }
 
     int vehicle_position_starting_from_0 = vehicle_position_starting_from_1 - 1;
@@ -93,6 +94,44 @@ bool handle_sort_registry_operation(struct Registry *registry)
     return true;
 }
 
+bool handle_show_info_for_vehicle_operation(struct Registry *registry)
+{
+    if (is_registry_empty(registry))
+    {
+        printf("The registry contains no vehicles.\n");
+        return false;
+    }
+
+    printf("Enter the position of a vehicle you want to get info about: ");
+
+    int vehicle_position_starting_from_1;
+    bool is_position_input_successful =
+        read_int_input(&vehicle_position_starting_from_1);
+
+    if (!is_position_input_successful)
+    {
+        printf("Invalid vehicle position input\n");
+        return false;
+    }
+
+    bool is_vehicle_position_valid =
+        vehicle_position_starting_from_1 >= 1 &&
+        vehicle_position_starting_from_1 <= registry->vehicle_count;
+
+    if (!is_vehicle_position_valid)
+    {
+        printf("There's no car with number %d in the registry\n",
+               vehicle_position_starting_from_1);
+        return false;
+    }
+
+    int vehicle_position_starting_from_0 = vehicle_position_starting_from_1 - 1;
+
+    print_vehicle(&(registry->vehicles[vehicle_position_starting_from_0]));
+
+    return true;
+}
+
 bool perform_operation_on_registry(struct Registry *registry,
                                    enum Operation operation)
 {
@@ -108,6 +147,9 @@ bool perform_operation_on_registry(struct Registry *registry,
         break;
     case SORT_REGISTRY:
         result = handle_sort_registry_operation(registry);
+        break;
+    case SHOW_INFO_FOR_VEHICLE:
+        result = handle_show_info_for_vehicle_operation(registry);
         break;
     case SHOW_INFO_FOR_ALL_VEHICLES:
         print_registry_contents(registry);
