@@ -12,4 +12,6 @@ struct Person
 
 bool initialize_person_from_user_input(struct Person *person);
 
+void initialize_person_with_random_values(struct Person *person);
+
 #endif // PERSON_H
