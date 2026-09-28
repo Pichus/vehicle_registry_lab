@@ -1,7 +1,40 @@
 #include "vehicle.h"
 #include "input_utilities.h"
 #include "person.h"
+#include "random_utilities.h"
 #include <stdio.h>
+#include <string.h>
+
+#define AMOUNT_OF_OPTIONS 10
+
+const char type_options[AMOUNT_OF_OPTIONS][TYPE_MAX_LENGTH] = {
+    "Sedan", "SUV",     "Hatchback", "Coupe", "Convertible",
+    "Wagon", "Minivan", "Pickup",    "Van",   "Motorcycle"};
+
+const char brand_options[AMOUNT_OF_OPTIONS][BRAND_MAX_LENGTH] = {
+    "Volvo", "Toyota", "BMW",        "Mercedes-Benz", "Audi",
+    "Ford",  "Honda",  "Volkswagen", "Hyundai",       "Nissan"};
+
+const char license_plate_options[AMOUNT_OF_OPTIONS][LICENSE_PLATE_MAX_LENGTH] =
+    {"ABC123", "XYZ789", "KLM456", "DEF321", "GHI654",
+     "JKL987", "MNO246", "PQR135", "STU864", "VWX579"};
+
+void initialize_vehicle_with_random_values(struct Vehicle *vehicle)
+{
+    int type_option_index = random_value_in_range(0, AMOUNT_OF_OPTIONS - 1);
+    int brand_option_index = random_value_in_range(0, AMOUNT_OF_OPTIONS - 1);
+    int license_plate_option_index =
+        random_value_in_range(0, AMOUNT_OF_OPTIONS - 1);
+
+    strncpy(vehicle->type, type_options[type_option_index], TYPE_MAX_LENGTH);
+    strncpy(vehicle->brand, brand_options[brand_option_index],
+            BRAND_MAX_LENGTH);
+    strncpy(vehicle->license_plate,
+            license_plate_options[license_plate_option_index],
+            LICENSE_PLATE_MAX_LENGTH);
+
+    initialize_person_with_random_values(&(vehicle->owner));
+}
 
 void print_vehicle(const struct Vehicle *vehicle)
 {

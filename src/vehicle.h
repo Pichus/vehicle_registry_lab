@@ -19,4 +19,6 @@ void print_vehicle(const struct Vehicle *vehicle);
 
 bool initialize_vehicle_from_user_input(struct Vehicle *vehicle);
 
+void initialize_vehicle_with_random_values(struct Vehicle *vehicle);
+
 #endif // VEHICLE_H
