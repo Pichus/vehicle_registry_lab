@@ -1,6 +1,7 @@
 #include "input_utilities.h"
 #include "menu.h"
 #include "operation.h"
+#include "random_utilities.h"
 #include "registry.h"
 #include "vehicle.h"
 #include <errno.h>
@@ -201,6 +202,7 @@ void run_main_loop(void)
 
 int main(void)
 {
+    set_random_seed();
     run_main_loop();
     return 0;
 }
