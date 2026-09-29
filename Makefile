@@ -15,7 +15,7 @@ ifeq ($(debug), 1)
 	CFLAGS := -g -O0 $(CFLAGS)
 endif
 
-SOURCE_FILES := $(wildcard $(SRC_DIR)/*.c)
+SOURCE_FILES := $(shell find $(SRC_DIR) -name '*.c')
 
 OBJECT_FILES := $(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $(SOURCE_FILES)) 
 
@@ -25,6 +25,7 @@ $(BUILD_DIR)/$(TARGET_EXEC): $(OBJECT_FILES)
 	$(CC) $(OBJECT_FILES) -o $@
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | $(BUILD_DIR) 
+	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@ 
 
 $(BUILD_DIR):
