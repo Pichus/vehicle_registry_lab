@@ -133,6 +133,28 @@ bool handle_show_info_for_vehicle_operation(struct Registry *registry)
     return true;
 }
 
+bool handle_add_random_vehicle_operation(struct Registry *registry)
+{
+    if (is_registry_full(registry))
+    {
+        printf("Vehicle registry is already full\n");
+        return false;
+    }
+
+    struct Vehicle vehicle;
+    initialize_vehicle_with_random_values(&vehicle);
+
+    bool is_push_back_successful =
+        push_back_vehicle_to_registry(registry, vehicle);
+
+    if (!is_push_back_successful)
+    {
+        printf("Vehicle registry is already full\n");
+    }
+
+    return is_push_back_successful;
+}
+
 bool perform_operation_on_registry(struct Registry *registry,
                                    enum Operation operation)
 {
@@ -154,6 +176,9 @@ bool perform_operation_on_registry(struct Registry *registry,
         break;
     case SHOW_INFO_FOR_ALL_VEHICLES:
         print_registry_contents(registry);
+        break;
+    case ADD_RANDOM_VEHICLE:
+        result = handle_add_random_vehicle_operation(registry);
         break;
     default:
         break;
