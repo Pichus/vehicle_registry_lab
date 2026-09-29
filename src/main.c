@@ -1,5 +1,5 @@
-#include "menu.h"
-#include "operation.h"
+#include "menu/menu.h"
+#include "menu/operation.h"
 #include "registry.h"
 #include "utils/input_utils.h"
 #include "utils/random_utils.h"
