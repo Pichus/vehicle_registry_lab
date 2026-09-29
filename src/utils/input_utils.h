@@ -1,5 +1,5 @@
-#ifndef SAFE_INPUT_H
-#define SAFE_INPUT_H
+#ifndef INPUT_UTILS_H
+#define INPUT_UTILS_H
 
 #include <stdbool.h>
 
@@ -11,4 +11,4 @@ bool read_int_input(int *result);
 
 void flush_input_stream(void);
 
-#endif // SAFE_INPUT_H
+#endif // INPUT_UTILS_H
