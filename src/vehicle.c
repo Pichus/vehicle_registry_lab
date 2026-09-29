@@ -1,7 +1,7 @@
 #include "vehicle.h"
-#include "input_utilities.h"
 #include "person.h"
-#include "random_utilities.h"
+#include "utils/input_utils.h"
+#include "utils/random_utils.h"
 #include <stdio.h>
 #include <string.h>
 

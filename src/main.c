@@ -1,8 +1,8 @@
-#include "input_utilities.h"
 #include "menu.h"
 #include "operation.h"
-#include "random_utilities.h"
 #include "registry.h"
+#include "utils/input_utils.h"
+#include "utils/random_utils.h"
 #include "vehicle.h"
 #include <errno.h>
 #include <stdbool.h>
