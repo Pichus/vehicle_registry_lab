@@ -8,7 +8,7 @@ SRC_DIR := ./src
 CC := gcc-15
 
 # https://stackoverflow.com/questions/3375697/what-are-the-useful-gcc-flags-for-c
-CFLAGS := -MMD -MP -Wall -Wextra -Wfloat-equal -Wundef -Wshadow -Wpointer-arith -Wstrict-prototypes
+CFLAGS := -Isrc -MMD -MP -Wall -Wextra -Wfloat-equal -Wundef -Wshadow -Wpointer-arith -Wstrict-prototypes
 
 ifeq ($(debug), 1)
 	CC := clang
@@ -19,7 +19,7 @@ SOURCE_FILES := $(shell find $(SRC_DIR) -name '*.c')
 
 OBJECT_FILES := $(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $(SOURCE_FILES)) 
 
-DEPENDENCY_FILES := $(patsubst $(BUILD_DIR)/%.o, $(BUILD_DIR)/%.d, $(OBJECT_FILES));
+DEPENDENCY_FILES := $(patsubst $(BUILD_DIR)/%.o, $(BUILD_DIR)/%.d, $(OBJECT_FILES))
 
 $(BUILD_DIR)/$(TARGET_EXEC): $(OBJECT_FILES) 
 	$(CC) $(OBJECT_FILES) -o $@
