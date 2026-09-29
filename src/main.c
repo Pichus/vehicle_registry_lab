@@ -1,3 +1,4 @@
+#include "entities/person.h"
 #include "entities/registry.h"
 #include "entities/vehicle.h"
 #include "menu/menu.h"
@@ -155,6 +156,49 @@ bool handle_add_random_vehicle_operation(struct Registry *registry)
     return is_push_back_successful;
 }
 
+bool handle_search_for_vehicle_owner_operation(struct Registry *registry)
+{
+    if (is_registry_empty(registry))
+    {
+        printf("Can't search through an empty registry.\n");
+        return false;
+    }
+
+    if (!is_registry_sorted(registry))
+    {
+        printf("Before performing a search operation, the registry must be "
+               "sorted.\n");
+        return false;
+    }
+
+    char owner_name[MAX_NAME_SIZE];
+    bool is_name_input_successfull =
+        read_user_input_into_buffer(owner_name, MAX_NAME_SIZE);
+
+    if (!is_name_input_successfull)
+    {
+        printf("Invalid input.\n");
+        return false;
+    }
+
+    int target_vehicle_index =
+        find_vehicle_index_by_owner_name(registry, owner_name);
+
+    bool is_vehicle_found = target_vehicle_index != -1;
+
+    if (!is_vehicle_found)
+    {
+        printf("Vehicle not found.\n");
+        return false;
+    }
+
+    struct Vehicle vehicle = registry->vehicles[target_vehicle_index];
+
+    print_vehicle(&vehicle);
+
+    return true;
+}
+
 bool perform_operation_on_registry(struct Registry *registry,
                                    enum Operation operation)
 {
@@ -179,6 +223,9 @@ bool perform_operation_on_registry(struct Registry *registry,
         break;
     case ADD_RANDOM_VEHICLE:
         result = handle_add_random_vehicle_operation(registry);
+        break;
+    case SEARCH_FOR_VEHICLE_OWNER:
+        result = handle_search_for_vehicle_owner_operation(registry);
         break;
     default:
         break;

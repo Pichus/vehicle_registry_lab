@@ -21,7 +21,8 @@ bool push_back_vehicle_to_registry(struct Registry *registry,
 bool remove_vehicle_from_registry(struct Registry *registry,
                                   int vehicle_position);
 
-struct Vehicle *find_vehicle_by_owner_name(char *owner_name);
+int find_vehicle_index_by_owner_name(struct Registry *registry,
+                                     char *owner_name);
 
 void sort_registry_by_owner_name(struct Registry *registry);
 

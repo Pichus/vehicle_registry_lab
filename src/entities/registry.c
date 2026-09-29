@@ -4,6 +4,40 @@
 #include <stdio.h>
 #include <string.h>
 
+int find_vehicle_index_by_owner_name(struct Registry *registry,
+                                     char *owner_name)
+{
+    int left = 0;
+    int right = registry->vehicle_count - 1;
+
+    while (left <= right)
+    {
+        int middle = left + ((right - left) / 2);
+
+        if (strstr(registry->vehicles[middle].owner.name, owner_name))
+        {
+            return middle;
+        }
+
+        if (strncmp(registry->vehicles[middle].owner.name, owner_name,
+                    MAX_NAME_SIZE) < 0)
+        {
+            left = middle + 1;
+            right = registry->vehicle_count - 1;
+            continue;
+        }
+
+        if (strncmp(registry->vehicles[middle].owner.name, owner_name,
+                    MAX_NAME_SIZE) > 0)
+        {
+            right = middle - 1;
+            continue;
+        }
+    }
+
+    return -1;
+}
+
 void initialize_registry_with_default_values(struct Registry *registry)
 {
     registry->vehicle_count = 0;
