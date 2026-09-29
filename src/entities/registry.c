@@ -1,6 +1,6 @@
-#include "registry.h"
-#include "person.h"
-#include "vehicle.h"
+#include "entities/registry.h"
+#include "entities/person.h"
+#include "entities/vehicle.h"
 #include <stdio.h>
 #include <string.h>
 

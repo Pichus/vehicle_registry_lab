@@ -1,7 +1,7 @@
 #ifndef REGISTRY_H
 #define REGISTRY_H
 
-#include "vehicle.h"
+#include "entities/vehicle.h"
 #include <stdbool.h>
 #define MAX_VEHICLE_REGISTRY_CAPACITY 10
 

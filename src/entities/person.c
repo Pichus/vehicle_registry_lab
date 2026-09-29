@@ -1,4 +1,4 @@
-#include "person.h"
+#include "entities/person.h"
 #include "utils/input_utils.h"
 #include "utils/random_utils.h"
 #include <stdio.h>

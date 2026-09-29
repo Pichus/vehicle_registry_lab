@@ -1,5 +1,5 @@
-#include "vehicle.h"
-#include "person.h"
+#include "entities/vehicle.h"
+#include "entities/person.h"
 #include "utils/input_utils.h"
 #include "utils/random_utils.h"
 #include <stdio.h>

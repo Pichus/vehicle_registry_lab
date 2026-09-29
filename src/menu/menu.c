@@ -1,6 +1,6 @@
-#include "menu.h"
-#include "menu_option.h"
-#include "operation.h"
+#include "menu/menu.h"
+#include "menu/menu_option.h"
+#include "menu/operation.h"
 #include <stdio.h>
 
 const struct MenuOption menu_options[] = {

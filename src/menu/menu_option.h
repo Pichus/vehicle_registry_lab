@@ -1,7 +1,7 @@
 #ifndef MENU_OPTION_H
 #define MENU_OPTION_H
 
-#include "operation.h"
+#include "menu/operation.h"
 #define MAX_DESCRIPTION_SIZE 50
 
 struct MenuOption

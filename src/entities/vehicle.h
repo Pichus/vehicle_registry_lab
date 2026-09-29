@@ -1,7 +1,7 @@
 #ifndef VEHICLE_H
 #define VEHICLE_H
 
-#include "person.h"
+#include "entities/person.h"
 #include <stdbool.h>
 #define LICENSE_PLATE_MAX_LENGTH 101
 #define BRAND_MAX_LENGTH 101
