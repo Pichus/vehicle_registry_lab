@@ -4,6 +4,54 @@
 #include <stdio.h>
 #include <string.h>
 
+#define SAVE_FILE_NAME "vehicle_registry_save.bin"
+#define BINARY_WRITE_MODE "wb"
+#define BINARY_READ_MODE "rb"
+
+bool initialize_registry_from_save_file(struct Registry *registry)
+{
+    FILE *file_pointer = fopen(SAVE_FILE_NAME, BINARY_READ_MODE);
+
+    bool file_exists = file_pointer != NULL;
+
+    if (!file_exists)
+    {
+        return false;
+    }
+
+    int elements_read =
+        fread(registry, sizeof(struct Registry), 1, file_pointer);
+
+    bool is_read_successful = elements_read == 1;
+
+    return is_read_successful;
+}
+
+bool persist_registry(struct Registry registry)
+{
+    FILE *file_pointer = fopen(SAVE_FILE_NAME, BINARY_WRITE_MODE);
+
+    bool is_file_opened_successfully = file_pointer != NULL;
+    if (!is_file_opened_successfully)
+    {
+        return false;
+    }
+
+    int elements_written =
+        fwrite(&registry, sizeof(struct Registry), 1, file_pointer);
+
+    if (elements_written != 1)
+    {
+        return false;
+    }
+
+    int fclose_result = fclose(file_pointer);
+
+    bool is_file_closed_successfully = fclose_result != EOF;
+
+    return is_file_closed_successfully;
+}
+
 int find_vehicle_index_by_owner_name(struct Registry *registry,
                                      char *owner_name)
 {

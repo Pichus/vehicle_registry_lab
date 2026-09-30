@@ -49,6 +49,14 @@ void run_main_loop(void)
     struct Registry registry;
     initialize_registry_with_default_values(&registry);
 
+    bool is_initialization_from_save_file_successfull =
+        initialize_registry_from_save_file(&registry);
+
+    if (is_initialization_from_save_file_successfull)
+    {
+        printf("Restored last session successfully.\n");
+    }
+
     bool running = true;
     while (running)
     {
@@ -73,12 +81,21 @@ void run_main_loop(void)
 
         enum Operation next_operation = user_input;
 
-        perform_operation_on_registry(&registry, next_operation);
-
         if (next_operation == QUIT)
         {
             running = false;
+            continue;
         }
+
+        bool is_opreation_successfull =
+            perform_operation_on_registry(&registry, next_operation);
+
+        if (!is_opreation_successfull)
+        {
+            continue;
+        }
+
+        persist_registry(registry);
     }
 }
 

@@ -3,6 +3,7 @@
 
 #include "entities/vehicle.h"
 #include <stdbool.h>
+#include <stdio.h>
 #define MAX_VEHICLE_REGISTRY_CAPACITY 10
 
 struct Registry
@@ -13,7 +14,9 @@ struct Registry
 
 void initialize_registry_with_default_values(struct Registry *registry);
 
-void persist_registry(struct Registry registry);
+bool persist_registry(struct Registry registry);
+
+bool initialize_registry_from_save_file(struct Registry *registry);
 
 bool push_back_vehicle_to_registry(struct Registry *registry,
                                    struct Vehicle vehicle);
