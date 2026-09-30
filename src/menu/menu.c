@@ -4,16 +4,35 @@
 #include <stdio.h>
 
 const struct MenuOption menu_options[] = {
-    {.operation = ADD_VEHICLE, .description = "Add vehicle"},
-    {.operation = REMOVE_VEHICLE, .description = "Remove vehicle"},
-    {.operation = SORT_REGISTRY, .description = "Sort"},
-    {.operation = SHOW_INFO_FOR_VEHICLE, .description = "Info"},
-    {.operation = SHOW_INFO_FOR_ALL_VEHICLES, .description = "Show all"},
-    {.operation = ADD_RANDOM_VEHICLE, .description = "Add random"},
-    {.operation = SEARCH_FOR_VEHICLE_OWNER, .description = "Search"},
-    {.operation = QUIT, .description = "Quit"}};
+    {.operation = QUIT, .description = "Quit", .mutates_registry = false},
+    {.operation = ADD_VEHICLE,
+     .description = "Add vehicle",
+     .mutates_registry = true},
+    {.operation = REMOVE_VEHICLE,
+     .description = "Remove vehicle",
+     .mutates_registry = true},
+    {.operation = SORT_REGISTRY,
+     .description = "Sort",
+     .mutates_registry = true},
+    {.operation = SHOW_INFO_FOR_VEHICLE,
+     .description = "Info",
+     .mutates_registry = false},
+    {.operation = SHOW_INFO_FOR_ALL_VEHICLES,
+     .description = "Show all",
+     .mutates_registry = false},
+    {.operation = ADD_RANDOM_VEHICLE,
+     .description = "Add random",
+     .mutates_registry = true},
+    {.operation = SEARCH_FOR_VEHICLE_OWNER,
+     .description = "Search",
+     .mutates_registry = false}};
 
 const int menu_options_size = sizeof(menu_options) / sizeof(struct MenuOption);
+
+struct MenuOption get_menu_option_by_operation(enum Operation operation)
+{
+    return menu_options[operation];
+}
 
 void display_menu(void)
 {

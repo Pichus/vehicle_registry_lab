@@ -1,5 +1,6 @@
 #include "entities/registry.h"
 #include "menu/menu.h"
+#include "menu/menu_option.h"
 #include "menu/operation.h"
 #include "menu/operation_handlers.h"
 #include "utils/input_utils.h"
@@ -79,23 +80,28 @@ void run_main_loop(void)
             continue;
         }
 
-        enum Operation next_operation = user_input;
+        enum Operation chosen_operation = user_input;
+        struct MenuOption chosen_menu_option =
+            get_menu_option_by_operation(chosen_operation);
 
-        if (next_operation == QUIT)
+        if (chosen_operation == QUIT)
         {
             running = false;
             continue;
         }
 
         bool is_opreation_successfull =
-            perform_operation_on_registry(&registry, next_operation);
+            perform_operation_on_registry(&registry, chosen_operation);
 
         if (!is_opreation_successfull)
         {
             continue;
         }
 
-        persist_registry(registry);
+        if (chosen_menu_option.mutates_registry)
+        {
+            persist_registry(registry);
+        }
     }
 }
 
